@@ -2,8 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import Shoesdata from "./data";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import ItemDetail from "./Detail";
 
 function App() {
   let [shoes, shoesChange] = useState(Shoesdata);
@@ -11,12 +12,16 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="#home">ShoesSHop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link>
+                <Link to="/">Home</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/detail">Detail</Link>
+              </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -34,14 +39,20 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Route exact path="/">
-        <Jumbotron />
-        <ItemContainer shoes={shoes} />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Jumbotron />
+          <ItemContainer shoes={shoes} />
+        </Route>
 
-      <Route path="/detail">
-        <ItemDetail />
-      </Route>
+        <Route path="/detail">
+          <ItemDetail />
+        </Route>
+
+        <Route path="/:id">
+          <div>dasdasd</div>
+        </Route>
+      </Switch>
     </div>
   );
 }
@@ -85,24 +96,5 @@ function ItemContainer(props) {
     </div>
   );
 }
-function ItemDetail() {
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <img
-            src="https://codingapple1.github.io/shop/shoes1.jpg"
-            width="100%"
-          />
-        </div>
-        <div className="col-md-6 mt-4">
-          <h4 className="pt-5">상품명</h4>
-          <p>상품설명</p>
-          <p>120000원</p>
-          <button className="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-    </div>
-  );
-}
+
 export default App;
