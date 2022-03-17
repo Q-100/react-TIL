@@ -3,6 +3,7 @@ import "./App.css";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import Shoesdata from "./data";
 import { useState } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
   let [shoes, shoesChange] = useState(Shoesdata);
@@ -33,8 +34,14 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Jumbotron />
-      <ItemContainer shoes={shoes} />
+      <Route exact path="/">
+        <Jumbotron />
+        <ItemContainer shoes={shoes} />
+      </Route>
+
+      <Route path="/detail">
+        <ItemDetail />
+      </Route>
     </div>
   );
 }
@@ -74,6 +81,26 @@ function ItemContainer(props) {
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+function ItemDetail() {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img
+            src="https://codingapple1.github.io/shop/shoes1.jpg"
+            width="100%"
+          />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+        </div>
       </div>
     </div>
   );
