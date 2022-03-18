@@ -45,8 +45,8 @@ function App() {
           <ItemContainer shoes={shoes} />
         </Route>
 
-        <Route path="/detail">
-          <ItemDetail />
+        <Route path="/detail/:id">
+          <ItemDetail shoes={shoes} />
         </Route>
 
         <Route path="/:id">
